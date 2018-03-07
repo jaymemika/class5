@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Record Form</title>
+</head>
+<body>
+<form method="post">
+    <p>
+        <label for="make">Make:</label>
+        <input type="text" name="make" id="make">
+    </p>
+    <p>
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model">
+    </p>
+    <p>
+        <label for="year">Year:</label>
+        <input type="text" name="year" id="year">
+    </p>
+     <p>
+        <label for="color">Color:</label>
+        <input type="text" name="color" id="color">
+    </p>
+    <input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+<p id=”submitted></p>
+
+<script>
+function addtoDB() {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("submitted").innerHTML = "form submitted";
+    }
+  };
+  var make = document.getElementById('make').value;
+   var model = document.getElementById('model').value;
+   var year = document.getElementById('year').value;
+   var color = document.getElementById('color').value;
+   var queryString = "?make=" + make +  "&model=" + model + "&year=" + year + "&color=" + color;
+   console.log(queryString);
+   xhttp.open("GET", "carForm.php" + queryString, true);
+   xhttp.send(null); 
+}
+</script>
+
+
